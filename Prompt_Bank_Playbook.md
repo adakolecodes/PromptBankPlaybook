@@ -880,8 +880,8 @@ OUTPUT:
   >This prompt asks the AI to act as a quality assurance reviewer and compare an original text with a rewritten version. It checks for meaning drift and factual errors (dates, numbers, dosages, legal obligations), as well as missing/added claims and tone problems. Instead of rewriting again, it reports issues in a structured table with risk levels and suggested fixes. The final output is a clear checklist-style table that helps you correct the rewrite safely.
 
 ---
-<!--
-## 3) Text Manipulation (Quillbot Strategy)
+
+<!-- ## 3) Text Manipulation (Quillbot Strategy)
 
 ### Practical items to cover
 1. **Paraphrase for clarity (without plagiarism)**
@@ -1340,7 +1340,7 @@ OUTPUT:
 
   >This prompt asks the AI to act as a journal submission coordinator and generate a detailed checklist for final manuscript preparation. It tailors the checklist to your field, the required style guide (APA/Vancouver/other), and whether you’re submitting to a journal or a university. The checklist covers formatting, citations, tables/figures, ethics, and final PDF/export steps so you don’t miss common requirements. The final output is a structured checklist you can follow item-by-item before submission.
 
----
+--- -->
 
 ## 5) Slide Outline Prep for Gamma (AI presentations)
 
@@ -1612,7 +1612,7 @@ OUTPUT:
 
 ---
 
-## 6) Google AI Studio (Build)
+<!-- ## 6) Google AI Studio (Build)
 
 ### Practical items to cover
 1. **System instructions for role-based assistants (Law/Health/Finance)**
@@ -3178,6 +3178,7 @@ OUTPUT:
 
   >This prompt converts written document text into a format that sounds good when spoken. Chapter markers help listeners follow along, short sentences improve clarity, and the recap at the end reinforces key points. This is especially useful for accessibility (audio versions of notes) and for learners who prefer listening. The final outcome is an audio-friendly script ready to paste into ElevenLabs for voice generation.
 
----
 
--->
+
+
+ -->
