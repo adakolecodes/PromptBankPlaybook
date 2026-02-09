@@ -35,7 +35,7 @@ OUTPUT:
 ```
 
 ---
-<!--
+
 ## 1) GitHub Copilot (via VS Code)
 
 ### Practical items to cover
@@ -881,7 +881,7 @@ OUTPUT:
 
 ---
 
-<!-- ## 3) Text Manipulation (Quillbot Strategy)
+## 3) Text Manipulation (Quillbot Strategy)
 
 ### Practical items to cover
 1. **Paraphrase for clarity (without plagiarism)**
@@ -1340,7 +1340,7 @@ OUTPUT:
 
   >This prompt asks the AI to act as a journal submission coordinator and generate a detailed checklist for final manuscript preparation. It tailors the checklist to your field, the required style guide (APA/Vancouver/other), and whether you’re submitting to a journal or a university. The checklist covers formatting, citations, tables/figures, ethics, and final PDF/export steps so you don’t miss common requirements. The final output is a structured checklist you can follow item-by-item before submission.
 
---- -->
+---
 
 ## 5) Slide Outline Prep for Gamma (AI presentations)
 
