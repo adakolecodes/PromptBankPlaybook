@@ -1831,7 +1831,7 @@ OUTPUT:
 
   >This prompt instructs Google AI Studio to build a policy analysis app that reads policy text supplied by the user and extracts essential elements such as purpose, scope, responsibilities, exceptions, effective dates, and review cycles. The app strictly limits itself to what is explicitly stated in the policy and clearly marks any missing information as “Not stated,” ensuring accuracy, consistency, and compliance with formal policy documentation standards.
 
----
+--- -->
 
 ## 7) Nano Banana (Gemini image model for creative image generation)
 *(Your clarification: this is the Gemini/Google model you use for generating creative images. In practice, you’ll demo text-to-image + prompt craft + iteration.)*
@@ -2060,7 +2060,7 @@ OUTPUT:
 
     For more image-prompt examples, see: <https://ai.google.dev/gemini-api/docs/image-generation#image-generation-prompts>
 
-## 8) Gemini (Dashboards + Data Visualization)
+<!-- ## 8) Gemini (Dashboards + Data Visualization)
 
 ### Practical items to cover
 1. **Ask-for-chart prompts (bar/line/pie, pivot summaries)**
@@ -2267,9 +2267,9 @@ OUTPUT:
 
   >This prompt asks the AI to act as an M&E analyst and design a vaccination coverage dashboard. It computes a clear coverage percentage (actual/target) and specifies a bar-chart view by ward so gaps are obvious. It also asks for possible operational reasons behind low performance, which helps move from reporting to action planning. The final output is a coverage table, chart specification, and an underperformance list with plausible reasons to investigate.
 
----
+--- -->
 
-## 9) NotebookLM
+<!-- ## 9) NotebookLM
 
 ### Practical items to cover
 1. **Chat with sources (policy PDFs, guidelines, lecture notes)**
@@ -2457,9 +2457,9 @@ OUTPUT:
 
   >This prompt asks NotebookLM to turn a policy into two communication products for different audiences. It creates a short internal brief for a Director (high-level, action-oriented) and a public-facing press statement that avoids sensitive details. The constraints protect accuracy (facts/dates) and preserve official tone. The final output is a two-part brief you can use immediately for internal and external communication.
 
----
+--- -->
 
-## 10) Consensus (evidence-based research answers)
+<!-- ## 10) Consensus (evidence-based research answers)
 
 ### Practical items to cover
 1. **Clinical questions (PICO framing)**
@@ -2565,9 +2565,9 @@ OUTPUT:
 
   >This prompt asks the AI to act as an academic researcher and build an annotated bibliography using evidence found in Consensus. It enforces a minimum number of papers and keeps each annotation short but useful (study type, setting, key finding, limitation). Preferring recent high-quality evidence helps avoid outdated or weak sources. The final output is a numbered bibliography with citations and concise annotations you can expand into a literature review.
 
----
+--- -->
 
-## 11) Wispr Flow (voice dictation)
+<!-- ## 11) Wispr Flow (voice dictation)
 
 ### Practical items to cover
 1. **Dictating structured documents (SOAP notes, memos, audit reports)**
@@ -2725,9 +2725,9 @@ OUTPUT:
 
   >This script is a teaching demo: you intentionally speak with filler words to show how dictation tools capture natural speech. After transcription, students can practice “cleanup” by removing fillers, tightening sentences, and turning the paragraph into a clearer update. It’s a safe way to learn editing after dictation without sensitive content. The final outcome is a cleaned, professional version of the messy spoken text.
 
----
+--- -->
 
-## 12) Comet Browser (by Perplexity AI)
+<!-- ## 12) Comet Browser (by Perplexity AI)
 
 ### Practical items to cover
 1. **Research with citations (medical, legal, academic, market)**
@@ -2866,9 +2866,9 @@ OUTPUT:
 
   >This prompt teaches claim verification by forcing the assistant to trace a statement back to its original source. It asks for the earliest credible source, a quick quality assessment (study type, sample size, limitations), and a clear verdict (supported/partially/unsupported). This helps learners avoid repeating weak or misleading claims from secondary blogs. The final outcome is a fact-check report with links and limitations.
 
----
+--- -->
 
-## 13) Bohrium (AI-powered academic research)
+<!-- ## 13) Bohrium (AI-powered academic research)
 
 ### Practical items to cover
 1. **Paper discovery (topic → key papers, authors, venues)**
@@ -3006,9 +3006,9 @@ OUTPUT:
 
   >This prompt asks Bohrium to act like a research supervisor and create a short reading schedule that builds from foundations to current research. The daily structure prevents overwhelm and helps learners progress systematically. Ending with research questions/gaps turns reading into a project direction rather than passive consumption. The final outcome is a 2-week plan with daily readings and potential research questions.
 
----
+--- -->
 
-## 14) ElevenLabs (voice generation)
+<!-- ## 14) ElevenLabs (voice generation)
 
 ### Practical items to cover
 1. **Voiceovers for lectures and microlearning**
@@ -3176,9 +3176,4 @@ OUTPUT:
   [PASTE HERE]
   ```
 
-  >This prompt converts written document text into a format that sounds good when spoken. Chapter markers help listeners follow along, short sentences improve clarity, and the recap at the end reinforces key points. This is especially useful for accessibility (audio versions of notes) and for learners who prefer listening. The final outcome is an audio-friendly script ready to paste into ElevenLabs for voice generation.
-
-
-
-
- -->
+  >This prompt converts written document text into a format that sounds good when spoken. Chapter markers help listeners follow along, short sentences improve clarity, and the recap at the end reinforces key points. This is especially useful for accessibility (audio versions of notes) and for learners who prefer listening. The final outcome is an audio-friendly script ready to paste into ElevenLabs for voice generation. -->
