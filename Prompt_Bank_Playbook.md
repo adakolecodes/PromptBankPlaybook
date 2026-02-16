@@ -1834,7 +1834,6 @@ OUTPUT:
 --- -->
 
 ## 7) Nano Banana (Gemini image model for creative image generation)
-*(Your clarification: this is the Gemini/Google model you use for generating creative images. In practice, you’ll demo text-to-image + prompt craft + iteration.)*
 
 ### Practical items to cover
 1. **Prompt structure for reliable images (subject, scene, style, lighting, lens, aspect)**
