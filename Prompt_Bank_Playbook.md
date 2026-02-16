@@ -1835,13 +1835,6 @@ OUTPUT:
 
 ## 7) Nano Banana (Gemini image model for creative image generation)
 
-### Practical items to cover
-1. **Prompt structure for reliable images (subject, scene, style, lighting, lens, aspect)**
-2. **Academic visuals (figures, diagrams, concept illustrations)**
-3. **Professional visuals (flyers, social banners, icons, infographics)**
-4. **Health/Law visual ethics (privacy, realism disclaimers, avoiding misleading visuals)**
-5. **Iteration patterns (variants, negative constraints, brand consistency)**
-
 ### Practical examples
 
 #### 1) Prompt structure
