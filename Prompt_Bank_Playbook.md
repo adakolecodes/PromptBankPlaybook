@@ -44,6 +44,8 @@ OUTPUT:
 3. **Regex + text normalization (messy entries → standardized labels)**
 4. **SQL generation for business reporting**
 
+[Click here to download sample data used in this section](https://drive.google.com/drive/folders/1ruBkVizMuZEEsSwpPf8kntXf4BLK2sG9?usp=sharing)
+
 ### Practical examples (prompt cards)
 
 #### 1) Data cleaning scripts
