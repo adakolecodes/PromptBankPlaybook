@@ -2052,214 +2052,270 @@ OUTPUT:
 
     For more image-prompt examples, see: <https://ai.google.dev/gemini-api/docs/image-generation#image-generation-prompts>
 
-<!-- ## 8) Gemini (Dashboards + Data Visualization)
-
-### Practical items to cover
-1. **Ask-for-chart prompts (bar/line/pie, pivot summaries)**
-2. **Executive KPI dashboards (Finance/Aftersales/Customer Service)**
-3. **Audit dashboards (exceptions, anomalies, control failures)**
-4. **Health dashboards (clinic activity, outbreak signals)**
+## 8) Gemini (Dashboards + Data Visualization)
 
 ### Practical examples
 
-#### 1) Ask-for-chart prompts
-- Copy-ready prompt (requires file upload):
+#### 1) Finance and Account
 
-  ```text
-  You are a data analyst.
+```text
+You are a financial data analyst.
 
-  TASK:
-  Analyze the dataset I upload and produce a month-by-month summary and a line chart recommendation.
+I have uploaded a CSV file containing company financial transactions including income and expenses across departments.
 
-  INPUT:
-  [UPLOAD FILE: data.csv]
-  Tell me which columns represent date, category, and amount if not obvious.
+Create an interactive financial dashboard showing:
 
-  OUTPUT:
-  - A monthly summary table.
-  - A recommended line chart specification (x-axis, y-axis, series).
-  - 3 insights in plain English.
-  ```
+1. Total Revenue, Total Expenses, and Net Profit (KPI cards)
+2. Revenue vs Expenses over time (line chart)
+3. Revenue by Department (bar chart)
+4. Expenses by Category (bar chart)
+5. Expense distribution by Department (pie chart)
+6. Top 5 highest expenses (table)
+7. Monthly financial summary (table)
 
-  >This prompt asks the AI to act as a data analyst and summarize an uploaded dataset by month. It also makes the assistant explain how to visualize the result by specifying what should go on the x-axis, y-axis, and series for a line chart. The “tell me which columns…” line prevents mistakes when column names are unclear. The final output is a monthly summary table, a chart recommendation you can build in Excel/Power BI, and three plain-English insights.
+Also provide key insights such as:
+- Which department generates the most revenue
+- Which category has the highest expenses
+- Profit trend over time
+- Any unusual spending patterns
 
-  ---
+Make the dashboard clear, professional, and suitable for management decision-making.
+```
 
-- Copy-ready prompt (pivot + percent change, requires upload):
+[Click here to download sample data](https://drive.google.com/file/d/17_zvKEFxBXIqD0aTrwF2V1LLdeLwHxNH/view?usp=sharing)
 
-  ```text
-  You are a business intelligence analyst.
+---
 
-  TASK:
-  Build a pivot-style summary by category × month, including totals and month-over-month percent change.
+#### 2) Aftersales
 
-  INPUT:
-  [UPLOAD FILE: data.csv]
-  Expected columns: date, category, amount (or tell me the column names).
+```text
+You are a customer support and aftersales performance analyst.
 
-  OUTPUT:
-  - A table with: category, month, total_amount, mom_percent_change.
-  - A short note: which categories are growing/shrinking the fastest.
-  ```
+I have uploaded a CSV file containing aftersales service cases, including dates, case types, priority, channel, technician, SLA targets vs actual resolution time, costs, warranty status, visit count, and customer satisfaction.
 
-  >This prompt asks the AI to act as a BI analyst and produce a pivot-style summary plus month-over-month change. It forces the output into a tidy table so it’s easy to chart and filter later. The percent-change column helps you spot momentum (not just totals), which is useful for executive reviews. The final output is a category-by-month table with MoM change plus a short interpretation of the fastest movers.
+Create an interactive Aftersales Performance Dashboard that includes:
 
-  ---
+1. KPI cards: Total Cases, Resolved Cases, SLA Compliance Rate, Average Resolution Time (hours), Average Customer Satisfaction
+2. Cases trend over time (weekly or monthly line chart)
+3. Case volume by Case Type (bar chart)
+4. SLA Breaches by Priority (bar chart)
+5. Resolution status breakdown (pie chart)
+6. Technician performance: average SLA actual hours, SLA compliance rate, and average customer satisfaction (table)
+7. Cost analysis: Total Cost by Warranty Status (bar chart) and Top 10 most expensive cases (table)
+8. Channels analysis: cases by channel and satisfaction by channel (bar/column chart)
 
-#### 2) Executive KPI dashboards
-- **Aftersales:**
-  - Copy-ready prompt (requires file upload):
+Also provide insights such as:
+- Most common case types and which ones breach SLA the most
+- Which technicians resolve fastest and have the best satisfaction scores
+- Whether warranty vs out-of-warranty cases cost more
+- Any unusual patterns (e.g., repeated visits, critical cases with long resolution times)
 
-    ```text
-    You are a dashboard designer.
+Make the dashboard clear, professional, and suitable for management review.
+```
 
-    TASK:
-    Design an Aftersales KPI dashboard from the dataset.
+[Click here to download sample data](https://drive.google.com/file/d/1OwNpSX_ooJGjWjgrEJ3HU8oEg4g2UHQu/view?usp=sharing)
 
-    INPUT:
-    [UPLOAD FILE: tickets.csv]
-    Expected columns: created_at, closed_at, issue_category, priority, agent
+---
 
-    REQUIRED KPIs:
-    - Tickets opened vs closed (by week)
-    - SLA breach rate
-    - Top 5 issues
-    - Average resolution time
+#### 3) HR and Admin
 
-    OUTPUT:
-    - A dashboard layout (sections + charts).
-    - The exact calculations/formulas needed.
-    - 5 insights executives care about.
-    ```
+```text
+You are an HR analytics expert.
 
-    >This prompt asks the AI to act as a dashboard designer and propose a complete Aftersales KPI dashboard. It defines the exact KPIs required (volume, SLA breach, issue mix, resolution time) and requests both layout and calculations so the dashboard is buildable, not just conceptual. It also demands executive-level insights so the dashboard tells a story and supports decisions. The final output is a dashboard plan with charts, formulas, and leadership-friendly insights.
+I have uploaded a CSV file containing employee records, including department, job title, salary, hire date, employment status, performance ratings, leave balances, attendance rate, training hours, overtime, and exit information.
 
-    ---
+Create an interactive HR & Admin dashboard showing:
 
-- **Customer Service:**
-  - Copy-ready prompt (requires file upload):
+1. KPI cards:
+   - Total Employees
+   - Active Employees
+   - Attrition Rate
+   - Average Salary
+   - Average Performance Rating
+   - Average Attendance Rate
 
-    ```text
-    You are a customer support analytics lead.
+2. Employee distribution by Department (bar chart)
 
-    TASK:
-    Propose a dashboard by agent.
+3. Employee count by Employment Type (pie chart)
 
-    INPUT:
-    [UPLOAD FILE: tickets.csv]
-    Expected columns: agent, created_at, first_response_at (or messages), closed_at, reopened (True/False)
-    Optional: csat_score
+4. Salary distribution by Department (bar chart)
 
-    METRICS:
-    - First response time
-    - Resolution time
-    - Reopen rate
-    - CSAT proxy (define one if csat_score missing)
+5. Performance rating by Department (bar chart)
 
-    OUTPUT:
-    - Dashboard layout + formulas + recommended targets.
-    ```
+6. Attendance rate by Department (bar chart)
 
-    >This prompt asks the AI to act as a customer support analytics lead and design an agent-performance dashboard. It focuses on operational metrics (first response, resolution, reopen rate) and includes target suggestions so managers know what “good” looks like. If CSAT is missing, it asks the assistant to define a reasonable proxy instead of stopping. The final output is a dashboard layout with formulas and recommended targets you can implement.
+7. Training hours by Department (bar chart)
 
-    ---
+8. Attrition analysis:
+   - Attrition trend over time (line chart)
+   - Attrition by Department (bar chart)
 
-- **Finance:**
-  - Copy-ready prompt (requires file upload):
+9. Top and bottom performers based on performance rating (table)
 
-    ```text
-    You are a finance analyst.
+10. Leave balance and leave usage analysis (bar chart)
 
-    TASK:
-    Build a cashflow dashboard specification.
+Also provide insights such as:
 
-    INPUT:
-    [UPLOAD FILE: cashflow.csv]
-    Expected columns: date, amount, type (inflow/outflow), category
+- Departments with highest and lowest performance
+- Departments with highest salary cost
+- Attrition patterns and possible risk areas
+- Employees with high overtime and low attendance
+- Workforce composition and training investment trends
 
-    OUTPUT:
-    - Weekly inflow/outflow chart spec
-    - Burn rate calculation
-    - Simple next-month forecast method (explain assumptions)
-    - 5 CFO-level insights
-    ```
+Make the dashboard professional and suitable for HR leadership decision-making.
+```
 
-    >This prompt asks the AI to act as a finance analyst and design a cashflow dashboard, not just compute a single metric. It produces a weekly inflow/outflow view, a burn-rate calculation, and a simple forecast approach with assumptions stated clearly. That helps you explain the numbers in meetings and avoid “black box” forecasting. The final output is a dashboard specification plus CFO-level insights you can present.
+[Click here to download sample data](https://drive.google.com/file/d/1yJ9CT50I24Y8kDKy3ZPjzuM1qrm_6HnU/view?usp=sharing)
 
-    ---
+---
 
-#### 3) Audit dashboards
-- Copy-ready prompt (audit exceptions dashboard, requires file upload):
+#### 4) Procurement
 
-  ```text
-  You are an audit analytics specialist.
+```text
+You are a procurement performance analyst.
 
-  TASK:
-  Create an audit exceptions dashboard plan from the dataset.
+I have uploaded a CSV file containing procurement records, including purchase requests, suppliers, departments, costs, budgets, delivery status, payment status, and lead times.
 
-  INPUT:
-  [UPLOAD FILE: transactions.csv]
-  Expected columns: transaction_id, date_time, amount, department, user, vendor, approval_limit
+Create an interactive Procurement Dashboard that includes:
 
-  EXCEPTIONS TO DETECT:
-  - Duplicates
-  - Weekend postings
-  - Split purchases just under approval limits (e.g., multiple transactions to same vendor within 3 days just below limit)
+1. KPI cards:
+   - Total Procurement Spend
+   - Total Number of Purchases
+   - Average Lead Time
+   - Budget Utilization Rate
+   - Percentage of Delayed Deliveries
 
-  OUTPUT:
-  - Dashboard layout (charts + filters)
-  - Rules/logic for each exception
-  - An exceptions heatmap by department
-  ```
+2. Procurement Spend by Department (bar chart)
 
-  >This prompt asks the AI to act as an audit analytics specialist and translate transaction data into an exceptions-focused dashboard. It defines the exact exception patterns to look for (duplicates, weekend postings, split purchases near approval limits) so the logic is audit-relevant. The heatmap requirement ensures you can quickly see where risk clusters by department. The final output is a dashboard layout plus clear detection rules you can implement and defend.
+3. Spend by Item Category (bar chart)
 
-  ---
+4. Supplier Spend Analysis (top 10 suppliers by total cost)
 
-#### 4) Health dashboards
-- Copy-ready prompt (cases dashboard, requires file upload):
+5. Procurement Method Distribution (pie chart)
 
-  ```text
-  You are a public health data analyst.
+6. Delivery Status Breakdown (pie chart)
 
-  TASK:
-  Create a weekly cases dashboard concept and narrative insights.
+7. Budget vs Actual Spend by Department (bar chart)
 
-  INPUT:
-  [UPLOAD FILE: cases.csv]
-  Expected columns: facility, date, diagnosis, case_count
+8. Lead Time Analysis by Supplier Category (bar chart)
 
-  OUTPUT:
-  - Dashboard layout (line charts, facility filters, diagnosis filters)
-  - Automatic spike detection rule
-  - 5 narrative insights for leadership
-  ```
+9. Payment Status Breakdown (pie chart)
 
-  >This prompt asks the AI to act as a public health data analyst and design a weekly cases dashboard with interpretive insights. It includes filters (facility, diagnosis) so leaders can drill down, and it requires a spike-detection rule so unusual increases are highlighted automatically. The narrative insights help you turn charts into a leadership briefing. The final output is a dashboard layout, a spike rule, and five leadership-friendly insights.
+10. High-Value Purchases (table sorted by Total_Cost_NGN)
 
-  ---
+Also provide insights such as:
 
-- Copy-ready prompt (vaccination coverage, requires file upload):
+- Departments with highest procurement spend
+- Suppliers with longest lead times
+- Percentage of delayed deliveries
+- Budget overruns or underutilized budgets
+- Procurement method trends (e.g., over-reliance on direct purchase)
 
-  ```text
-  You are a monitoring and evaluation (M&E) analyst.
+Make the dashboard professional and suitable for executive procurement review.
+```
 
-  TASK:
-  Build a vaccination coverage dashboard: target vs actual by ward.
+[Click here to download sample data](https://drive.google.com/file/d/1cQgM3hupCa9wR-kxGi1DtmIYJGcH8xjy/view?usp=sharing)
 
-  INPUT:
-  [UPLOAD FILE: vaccination.csv]
-  Expected columns: ward, month, target, actual
+---
 
-  OUTPUT:
-  - A table with coverage_percent = actual/target
-  - A bar chart spec per ward
-  - A list of underperforming wards and possible operational reasons
-  ```
+#### 5) Marketing
 
-  >This prompt asks the AI to act as an M&E analyst and design a vaccination coverage dashboard. It computes a clear coverage percentage (actual/target) and specifies a bar-chart view by ward so gaps are obvious. It also asks for possible operational reasons behind low performance, which helps move from reporting to action planning. The final output is a coverage table, chart specification, and an underperformance list with plausible reasons to investigate.
+```text
+You are a marketing performance analyst.
 
---- -->
+I have uploaded a CSV file containing marketing campaign data including channels, budgets, actual spend, impressions, clicks, leads, conversions, revenue generated, and ROI.
+
+Create an interactive Marketing Performance Dashboard that includes:
+
+1. KPI cards:
+   - Total Campaign Spend
+   - Total Revenue Generated
+   - Overall ROI
+   - Total Leads
+   - Total Conversions
+   - Average Conversion Rate
+
+2. Revenue by Channel (bar chart)
+
+3. Spend vs Revenue by Campaign (bar chart)
+
+4. Impressions, Clicks, and Leads trend over time (line chart)
+
+5. Conversion Rate by Channel (bar chart)
+
+6. ROI by Campaign (bar chart)
+
+7. Campaign Status Distribution (pie chart)
+
+8. Top 5 Campaigns by Revenue (table)
+
+9. Cost Efficiency Analysis:
+   - Cost per Click by Channel
+   - Cost per Lead by Channel
+
+Also provide insights such as:
+
+- Which channel generates the highest ROI
+- Campaigns with negative or low ROI
+- Most cost-efficient channels
+- Conversion performance across campaign types
+- Budget overspend or underspend patterns
+
+Make the dashboard professional and suitable for management review and marketing strategy decisions.
+```
+
+[Click here to download sample data](https://drive.google.com/file/d/16bsAFExA4ypFw0UtZ6rKM1gxKLTvsmhg/view?usp=sharing)
+
+---
+
+#### 6) Health and Safety
+
+```text
+You are a Health & Safety analyst.
+
+I have uploaded a CSV file containing HSE incident records, including incident type, severity, injury type, near misses, root causes, corrective actions, closure status, training requirements, days lost, and cost impact.
+
+Create an interactive Health & Safety Dashboard that includes:
+
+1. KPI cards:
+   - Total Incidents
+   - Total Near Misses
+   - Total Days Lost
+   - High Severity Incident Count
+   - Incident Closure Rate
+   - Total Cost Impact (NGN)
+
+2. Incidents trend over time (weekly or monthly line chart)
+
+3. Incident count by Incident Type (bar chart)
+
+4. Incident count by Severity (bar chart)
+
+5. Near Miss vs Incident breakdown (pie chart)
+
+6. Days Lost by Department (bar chart)
+
+7. Root Cause analysis (top root causes by count)
+
+8. Corrective action tracking:
+   - Action status breakdown (pie chart)
+   - Open actions by action owner (table)
+
+9. Equipment involved analysis (bar chart)
+
+10. Cost impact by incident type and severity (bar charts)
+
+Also provide insights such as:
+- Highest-risk sites/locations and departments
+- The most frequent incident types and root causes
+- Whether incidents are reducing or increasing over time
+- Where training is most needed based on patterns
+- Any unusual spikes (e.g., high severity incidents clustered in a period)
+
+Make the dashboard clear, professional, and suitable for management and compliance review.
+```
+
+[Click here to download sample data](https://drive.google.com/file/d/1gqXpFRsKGpo2oL4nKfTuGEMAMdrVDWb4/view?usp=sharing)
 
 <!-- ## 9) NotebookLM
 
