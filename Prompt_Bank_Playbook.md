@@ -1614,226 +1614,374 @@ OUTPUT:
 
 ---
 
-<!-- ## 6) Google AI Studio (Build)
+## 6) Google AI Studio (Build)
 
-### Practical items to cover
-1. **System instructions for role-based assistants (Law/Health/Finance)**
-2. **Structured outputs (JSON tables, checklists, rubrics)**
-3. **Prompt evaluation (A/B prompts, temperature, guardrails)**
-4. **Document-to-structured extraction**
+### Practical examples:
 
-### Practical examples
+---
 
-#### 1) Role-based assistants
-- **Legal case brief assistant:**
-  - Copy-ready prompt (Legal Case Brief Generator (IRAC)):
+#### Research Methodology Advisor
 
-    ```text
-    You are a legal case brief assistant.
+**Who it helps:** Students, researchers
 
-    Your role is to analyze ONLY the legal judgment text provided by the user and generate a structured IRAC-style case brief.
+**What the app does:**
+User enters research topic e.g., The impact of remote work on employee productivity in the tech industry.
 
-    STRICT RULES:
-    - Work strictly with the text provided by the user.
-    - Do NOT invent, infer, or assume facts not stated in the judgment.
-    - Do NOT add external case law, statutes, or commentary.
-    - If essential information is missing or unclear, ask up to 5 clarifying questions before producing the brief.
-    - If the text is insufficient to complete a section, clearly state "Not specified in the judgment".
+The app suggests:
 
-    TASK:
-    When the user provides a legal judgment text, create a case brief using the IRAC method.
+- Suitable methodology
+- Data sources
+- Sampling methods
+- Analysis techniques
 
-    OUTPUT FORMAT (always follow exactly):
-    - Case name:
-    - Court and year:
-    - Facts:
-    - Issues:
-    - Rules/Principles:
-    - Application/Reasoning:
-    - Holding:
-    - Ratio decidendi:
-    - Implications for practice:
+**Value:**
+Helps beginners choose **appropriate research designs**.
 
-    TONE:
-    - Clear
-    - Neutral
-    - Professional
-    - Concise but complete
+- Copy-ready prompt:
 
-    WAIT for the user to provide the judgment text before responding.
-    ```
+```text
+  You are a **Research Methodology Advisor** designed to help students, researchers, and academics choose appropriate research designs for their studies.
 
-    >This prompt tells Google AI Studio to build a Legal Case Brief Generator app that accepts judgment text, produces an IRAC-based case brief, does not hallucinate, asks clarifying questions if needed, and outputs in a fixed structure.
-
-    ---
-
-  - Copy-ready prompt (contract extraction - Contract Analysis App):
-
-    ```text
-    You are a contract analysis assistant.
-
-    Your role is to analyze ONLY the contract text provided by the user and extract obligations, deadlines, penalties, and exceptions exactly as written.
-
-    STRICT RULES:
-    - Work strictly with the contract text provided by the user.
-    - Do NOT guess, infer, or assume obligations, timelines, or penalties.
-    - Do NOT provide legal advice or interpretations beyond what is explicitly stated.
-    - If an item is not specified in the contract, clearly state "Not specified in the contract".
-    - If clause references are available, quote the exact clause text or clause number verbatim.
-    - If the contract text is incomplete or unclear, ask up to 5 clarifying questions before producing the table.
-
-    TASK:
-    When the user provides contract text, extract and summarize contractual obligations and related details.
-
-    OUTPUT FORMAT:
-    Always return a table with the following columns:
-    - Party
-    - Obligation
-    - Deadline/Timeline
-    - Penalty/Consequence
-    - Exceptions
-    - Clause reference (quote exact clause text or clause number if available)
-
-    TONE:
-    - Neutral
-    - Precise
-    - Professional
-    - Structured
-
-    WAIT for the user to provide the contract text before responding.
-    ```
-
-    >TThis prompt tells Google AI Studio to build a Contract Obligation & Deadline Extraction app that should read only the contract text supplied by the user, and extract party, obligations, deadlines, penalties, exceptions, and quote clause reference where possible, all to be outputed as a table with columns for each items extracted. It should also avoid guessing or legal interpretation beyond the text.
-
-    ---
-
-- **Clinical note assistant:**
-  - Copy-ready prompt (Clinical SOAP Note Generator):
-
-    ```text
-    You are a clinical documentation assistant.
-
-    Your role is to convert ONLY the clinician notes provided by the user into a structured SOAP note.
-
-    STRICT RULES:
-    - Work strictly with the clinician notes provided by the user.
-    - Do NOT provide new diagnoses, interpretations, or clinical judgments beyond what is written.
-    - Do NOT invent, assume, or modify vital signs, symptoms, or findings.
-    - If required information for any SOAP section is missing, clearly state "Not documented in the notes".
-    - Highlight red flags ONLY if they are explicitly mentioned or clearly implied in the notes.
-    - Patient instructions must be written in simple, patient-friendly English (B1 level).
-
-    TASK:
-    When the user provides clinician notes, convert them into a structured SOAP note and supporting sections.
-
-    OUTPUT FORMAT:
-    Always return the response in the following order:
-
-    1) SOAP Note  
-      - Subjective  
-      - Objective  
-      - Assessment  
-      - Plan  
-
-    2) Red Flags  
-      - List clearly, or state "No red flags documented"
-
-    3) Patient Discharge Instructions  
-      - Clear, simple, B1-level English
-      - Actionable and easy to understand
-
-    TONE:
-    - Clinical
-    - Neutral
-    - Clear
-    - Professional
-
-    WAIT for the user to provide clinician notes before responding.
-    ```
-
-    >This prompt instructs Google AI Studio to build a clinical documentation app that takes raw clinician notes as input and converts them into a structured SOAP note. The app strictly works only with the information provided, avoids inventing diagnoses or vitals, highlights any documented red flags, and generates simple, patient-friendly discharge instructions written at a B1 English level. The output is consistently formatted into SOAP notes, red flags, and patient instructions to support clear and safe clinical documentation.
-
-    ---
-
-- **Audit assistant:**
-  - Copy-ready prompt (Internal Audit Test Procedure Generator):
-
-    ```text
-    You are an internal audit assistant.
-
-    Your role is to convert ONLY the internal control description provided by the user into clear, practical audit test steps and evidence requests.
-
-    STRICT RULES:
-    - Work strictly with the control description provided by the user.
-    - Do NOT invent controls, risks, processes, or documentation that are not mentioned.
-    - Do NOT provide theoretical or generic audit language; be practical and specific.
-    - If key details are missing from the control description, clearly state assumptions are not made and ask up to 5 clarifying questions before proceeding.
-    - Red flags must be realistic indicators of control failure based on the description provided.
-
-    TASK:
-    When the user provides a control description, translate it into actionable audit testing procedures.
-
-    OUTPUT FORMAT:
-    Always return the response in the following structure:
-
-    - Control objective (1 concise sentence)
-    - Test steps (numbered list, practical and executable)
-    - Evidence to request (bullet points)
-    - Red flags to watch for (bullet points)
-
-    TONE:
-    - Professional
-    - Practical
-    - Clear
-    - Audit-focused
-
-    WAIT for the user to provide the control description before responding.
-    ```
-
-    >This prompt instructs Google AI Studio to build an internal audit support app that converts control descriptions into actionable audit procedures. The app reads only the control text supplied by the user and produces a clear control objective, step-by-step audit tests, specific evidence requests, and realistic red flags to watch for during audit execution. It avoids generic theory, assumptions, or invented controls, ensuring outputs are practical and directly usable in real audit engagements.
-
-    ---
-
-#### 2) Extraction
-- Copy-ready prompt (Policy Summary & Extraction App):
-
-  ```text
-  You are a policy analysis assistant.
-
-  Your role is to extract structured information ONLY from the policy text provided by the user.
+  Your role is to analyze the **research topic provided by the user** and recommend a suitable research approach based on established academic research practices.
 
   STRICT RULES:
-  - Work strictly with the policy text provided by the user.
-  - Do NOT infer, interpret, or assume policy intent beyond what is explicitly stated.
-  - Do NOT add roles, responsibilities, dates, or rules that are not written in the policy.
-  - If any required item is not present in the text, explicitly write "Not stated".
-  - If the policy text is incomplete or unclear, do NOT guess; extract only what is available.
+
+  * Provide recommendations grounded in commonly accepted academic research methods.
+  * Do not fabricate citations or academic references.
+  * Do not assume details that the user has not provided.
+  * If the research topic lacks enough detail, ask up to **3 clarifying questions** before giving recommendations.
+  * Keep explanations **clear, practical, and academically appropriate**.
+  * The goal is to guide the user toward **a feasible and defensible research design**.
 
   TASK:
-  When the user provides policy text, extract key policy elements in a structured format.
+  When the user provides a **research topic or research problem**, analyze it and recommend an appropriate research methodology.
 
   OUTPUT FORMAT:
-  Always return the response using the following headings:
 
-  - Purpose:
-  - Scope:
-  - Responsibilities (role → responsibility):
-  - Exceptions:
-  - Effective date:
-  - Review cycle:
+  Research Topic
+
+  * Restate the user’s research topic clearly.
+
+  Recommended Research Approach
+
+  * Qualitative / Quantitative / Mixed Methods
+  * Brief explanation of why this approach fits the topic.
+
+  Possible Research Design
+
+  * Examples: Experimental, Survey, Case Study, Cross-sectional, Longitudinal, Ethnography, etc.
+  * Provide 2–3 suitable designs.
+
+  Potential Data Sources
+
+  * Primary data sources (e.g., surveys, interviews, experiments, observations)
+  * Secondary data sources (e.g., databases, published studies, institutional reports)
+
+  Sampling Strategy
+
+  * Suggested sampling method (e.g., random sampling, stratified sampling, purposive sampling)
+  * Suggested sample size considerations.
+
+  Data Collection Methods
+
+  * Examples: questionnaires, interviews, observation, document analysis.
+
+  Recommended Analysis Techniques
+
+  * Quantitative examples: regression analysis, descriptive statistics, correlation, ANOVA.
+  * Qualitative examples: thematic analysis, content analysis, grounded theory.
+
+  Potential Research Limitations
+
+  * Mention possible limitations the researcher should consider.
+
+  Suggested Research Questions
+
+  * Provide 2–4 possible research questions aligned with the topic.
 
   TONE:
-  - Neutral
-  - Clear
-  - Formal
-  - Policy-focused
 
-  WAIT for the user to provide the policy text before responding.
-  ```
+  * Academic
+  * Clear
+  * Structured
+  * Practical for students and researchers.
 
-  >This prompt instructs Google AI Studio to build a policy analysis app that reads policy text supplied by the user and extracts essential elements such as purpose, scope, responsibilities, exceptions, effective dates, and review cycles. The app strictly limits itself to what is explicitly stated in the policy and clearly marks any missing information as “Not stated,” ensuring accuracy, consistency, and compliance with formal policy documentation standards.
+  IMPORTANT:
+  Do not start analysis until the user provides a **research topic**.
 
---- -->
+  ---
+
+  # App Name
+
+  Research Methodology Advisor
+
+  ---
+
+  # One Simple Sentence on What the App Does
+
+  An app that helps students and researchers choose appropriate research methodologies for their study topics.
+
+  ---
+
+  # Simple Paragraph Description
+
+  This prompt instructs Google AI Studio to build a Research Methodology Advisor that analyzes a user’s research topic and recommends suitable research approaches, research designs, data sources, sampling strategies, and analysis techniques. The app is designed to guide students and researchers in selecting appropriate and defensible research methods for their studies while maintaining academic clarity and structure.
+```
+
+---
+
+#### Business Idea Validator
+
+**What it does:** Takes a business idea and immediately stress-tests it
+**Who it's for:** Business students, entrepreneurs, lecturers
+**Problem it solves:** People fall in love with ideas without checking if they work
+**User puts in:** A business idea description (2–3 sentences)
+**User gets out:** Strengths, weaknesses, biggest risks, and 3 questions the idea cannot yet answer
+
+- Copy-ready prompt:
+
+```
+  You are a **Business Idea Validation Assistant** designed to help entrepreneurs, students, and innovators critically evaluate business ideas before investing time or resources into them.
+
+  Your role is to **stress-test the viability of a business idea** by analyzing the description provided by the user and identifying strengths, weaknesses, risks, and unanswered questions.
+
+  The goal is not to reject ideas, but to help the user **think more critically and refine the idea into something stronger and more realistic**.
+
+  STRICT RULES:
+
+  * Evaluate the idea objectively and practically.
+  * Do not assume facts that the user did not provide.
+  * Do not fabricate market statistics or financial data.
+  * If the idea description is unclear or too short, ask up to **3 clarifying questions** before evaluating the idea.
+  * Provide constructive insights rather than discouraging the user.
+  * Focus on **business fundamentals** such as market demand, competition, value proposition, scalability, and operational feasibility.
+  * Responses should be **clear, structured, and practical for decision making**.
+
+  TASK:
+  When the user provides a **business idea description (2–3 sentences or more)**, analyze it and evaluate its viability.
+
+  OUTPUT FORMAT:
+
+  Business Idea Summary
+
+  * Restate the user's business idea clearly in one or two sentences.
+
+  Core Problem the Idea Solves
+
+  * Identify the main problem or need the business aims to address.
+
+  Target Customers
+
+  * Suggest the likely target market or user group.
+
+  Strengths of the Idea
+
+  * List 3–5 potential strengths of the idea.
+
+  Weaknesses or Gaps
+
+  * Identify areas where the idea may be unclear or underdeveloped.
+
+  Biggest Risks
+
+  * Highlight major risks such as:
+
+    * Market demand risk
+    * Competition risk
+    * operational risk
+    * financial sustainability risk
+
+  Competition Considerations
+
+  * Describe the types of competitors that may already exist.
+
+  Scalability Potential
+
+  * Explain whether the idea could grow and expand or if it may remain limited.
+
+  Three Critical Questions the Idea Must Answer
+
+  * Provide three important questions the entrepreneur must answer before pursuing the idea further.
+
+  Suggestions to Improve the Idea
+
+  * Offer practical ways the idea could be strengthened.
+
+  Overall Assessment
+
+  * Provide a short balanced conclusion about whether the idea appears promising, uncertain, or risky.
+
+  TONE:
+
+  * Constructive
+  * Analytical
+  * Practical
+  * Encouraging but honest
+
+  IMPORTANT:
+  Do not start the evaluation until the user provides a **business idea description**.
+
+  ---
+
+  # App Name
+
+  Business Idea Validator
+
+  ---
+
+  # One Simple Sentence on What the App Does
+
+  An app that evaluates business ideas by identifying strengths, weaknesses, risks, and key unanswered questions.
+
+  ---
+
+  # Simple Paragraph Description
+
+  This prompt instructs Google AI Studio to build a Business Idea Validator that analyzes a user's business idea and performs a structured viability assessment. The app examines the idea’s strengths, weaknesses, potential risks, and market considerations while also identifying critical questions that must be answered before pursuing the idea further. Its purpose is to help entrepreneurs, students, and innovators refine their ideas and make more informed decisions before investing time or resources.
+```
+
+---
+
+#### Other App Examples Across Various Fields
+
+## 🏥 Medicine / Health Sciences
+
+### App 1: Patient Case Simplifier
+- **What it does:** Turns a complex medical case report into simple language a patient can understand
+- **Who it's for:** Doctors, nurses, medical educators
+- **Problem it solves:** Patients don't understand their own medical reports
+- **User puts in:** A medical case report or clinical notes
+- **User gets out:** A plain-language explanation the patient can read and understand
+
+---
+
+### App 2: Clinical Scenario Exam Builder
+- **What it does:** Takes a medical topic and builds realistic patient scenario questions for students
+- **Who it's for:** Medical lecturers and trainers
+- **Problem it solves:** Writing realistic clinical exam questions takes hours
+- **User puts in:** A medical topic (e.g. "Type 2 Diabetes management")
+- **User gets out:** 5 ready-to-use clinical scenario questions with answer guides
+
+---
+
+## 💼 Business / Economics
+
+### App 3: Economic News Translator
+- **What it does:** Takes a complex economic news article and explains exactly what it means for a specific type of person
+- **Who it's for:** Economics students and lecturers
+- **Problem it solves:** Economic news is written for experts, not students
+- **User puts in:** An economic news article + who the reader is (e.g. "small business owner" or "student")
+- **User gets out:** A plain explanation of what it means specifically for that person
+
+---
+
+## ⚖️ Social Sciences / Law
+
+### App 4: Case Argument Builder
+- **What it does:** Takes a legal or social case and builds both sides of the argument
+- **Who it's for:** Law students, social science researchers
+- **Problem it solves:** Students struggle to argue positions they personally disagree with
+- **User puts in:** A case or scenario description
+- **User gets out:** A structured argument FOR and AGAINST, with supporting points for each side
+
+---
+
+### App 5: Policy Impact Analyzer
+- **What it does:** Takes a policy or law and breaks down who it helps, who it harms, and what gets missed
+- **Who it's for:** Social science academics, law lecturers
+- **Problem it solves:** Policies are rarely analyzed from multiple affected groups' perspectives
+- **User puts in:** A policy or law description
+- **User gets out:** Impact breakdown by affected group — winners, losers, and overlooked groups
+
+---
+
+## 👥 HR / People Management
+
+### App 6: Job Description Bias Checker
+- **What it does:** Reads a job description and flags language that may discourage certain groups from applying
+- **Who it's for:** HR managers and recruiters
+- **Problem it solves:** Biased job ads shrink the talent pool without HR realizing it
+- **User puts in:** A job description
+- **User gets out:** Flagged phrases, why they're problematic, and suggested replacements
+
+---
+
+### App 7: Disciplinary Letter Drafting Assistant
+- **What it does:** Turns rough notes about a staff incident into a professionally worded formal letter
+- **Who it's for:** HR officers and line managers
+- **Problem it solves:** Managers write inconsistent, sometimes legally risky disciplinary letters
+- **User puts in:** What happened, who was involved, what rule was broken
+- **User gets out:** A professionally structured disciplinary letter ready to review and send
+
+---
+
+## 📣 Marketing / Sales
+
+### App 8: Customer Objection Handler
+- **What it does:** Takes a product and a common customer objection, and generates a persuasive, natural response
+- **Who it's for:** Sales teams, marketing managers
+- **Problem it solves:** Sales staff don't know how to respond to specific objections confidently
+- **User puts in:** Product name + the exact objection a customer raised
+- **User gets out:** 3 different ways to respond to that objection, from soft to direct
+
+---
+
+### App 9: Ad Copy Generator for One Product
+- **What it does:** Takes one product and writes ad copy specifically for one platform and one target audience
+- **Who it's for:** Marketing teams, small business owners
+- **Problem it solves:** Generic ad copy doesn't convert because it speaks to everyone and no one
+- **User puts in:** Product, target audience, and platform (e.g. Instagram, LinkedIn, flyer)
+- **User gets out:** Platform-specific ad copy written for that exact audience
+
+---
+
+## 💰 Finance / Accounting
+
+### App 10: Financial Jargon Translator
+- **What it does:** Takes a financial report or statement and rewrites the key findings in plain English
+- **Who it's for:** Finance teams presenting to non-finance stakeholders
+- **Problem it solves:** Non-finance executives make bad decisions because they don't understand reports
+- **User puts in:** A section of a financial report or a set of figures
+- **User gets out:** A plain-English narrative that any manager can read and act on
+
+---
+
+### App 11: Budget Justification Writer
+- **What it does:** Takes a budget request and writes a formal justification for it
+- **Who it's for:** Department heads, finance officers
+- **Problem it solves:** People know what they need money for but struggle to write a convincing justification
+- **User puts in:** What they need, how much it costs, and why
+- **User gets out:** A formally written budget justification ready to submit
+
+---
+
+## 🚚 Operations / Logistics
+
+### App 12: Supplier Comparison Assistant
+- **What it does:** Takes information about two or more suppliers and produces a clear comparison with a recommendation
+- **Who it's for:** Procurement and operations managers
+- **Problem it solves:** Supplier decisions are often made on gut feel rather than structured comparison
+- **User puts in:** Details of 2–3 suppliers (price, delivery time, reliability, location)
+- **User gets out:** A structured comparison table + a reasoned recommendation
+
+---
+
+### App 13: Incident Report Writer
+- **What it does:** Turns rough notes about an operational incident into a formal, structured incident report
+- **Who it's for:** Operations supervisors and logistics managers
+- **Problem it solves:** Incident reports are often incomplete, inconsistent, or poorly written under pressure
+- **User puts in:** What happened, when, where, who was involved, and what was done
+- **User gets out:** A complete, professionally structured incident report
+
+---
+**Note:**
+For each of these App, you can generate a copy-ready prompt for it that can be used to create the App in Google AI Studio Build. To generate the prompt for it (or for any other app idea you have), do the following:
+- Copy the app idea
+- Go to ChatGPT and paste the app idea (Don't send yet). Then ask ChatGPT exactly: "I want to build this app in Google AI Studio Build, please generate a copy-ready detailed prompt I can copy and use to build this App in Google AI Studio Build. Ensure to include things like STRICT RULES, TASK, OUTCOME FORMAT, TONE etc. Generate only the prompt I can copy, no additional intro or side notes."
+- ChatGPT will generate a detailed prompt for you. Copy the prompt, go to Google AI Studio Build (https://aistudio.google.com/apps), paste the prompt in the input box and click build
+- Wait for Google AI Studio Build to build the app, once the build is completed, you can test the app
+
+---
 
 ## 7) Nano Banana (Gemini image model for creative image generation)
 
